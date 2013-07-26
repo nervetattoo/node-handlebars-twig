@@ -1,0 +1,19 @@
+{
+  "name": "grunt-handlebars-twig-transpiler",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "lodash": "~1.3.1",
+    "handlebars": "~1.0.12",
+    "eyes": "~0.1.8"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  }
+}
