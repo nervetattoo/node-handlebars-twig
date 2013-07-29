@@ -1,31 +1,23 @@
 var assert = require('assert');
+var fs = require('fs');
 var Transpiler = require('lib/transpiler');
 
 var t = new Transpiler();
-
-describe('handlebars-twig', function() {
-    it('compiles variables', function() {
-        assert.equal(t.string('{{foo}}'), '{{foo}}');
-        assert.equal(t.string('{{foo.bar}}'), '{{foo.bar}}');
+var fixtures = fs.readdirSync('./fixtures')
+    .map(function(path) {
+        var source = ['fixtures', path, 'in.hbs'].join('/');
+        var expect = ['fixtures', path, 'out.twig'].join('/');
+        return {
+            name : path,
+            source: fs.readFileSync(source),
+            expect: fs.readFileSync(expect)
+        }
     });
 
-    it('compiles loops', function() {
-        var input = '{{#each foo}}{{/each}}';
-        var expected = '{%for _foo in foo%}\n{%endfor%}';
-        assert.equal(t.string(input), expected);
-
-        var input = '{{#each foo}}{{bar}}{{/each}}';
-        var expected = '{%for _foo in foo%}\n{{_foo.bar}}\n{%endfor%}';
-        assert.equal(t.string(input), expected);
-    });
-
-    it('compiles conditionals', function() {
-        var input = '{{#if foo}}{{/if}}';
-        var expected = '{%if foo%}\n{%endif%}';
-        assert.equal(t.string(input), expected);
-
-        var input = '{{#unless foo}}{{/unless}}';
-        var expected = '{%if !foo%}\n{%endif%}';
-        assert.equal(t.string(input), expected);
+describe('handlebars-twig compiles', function() {
+    fixtures.forEach(function(fixture) {
+        it('compiles ' + fixture.name, function() {
+            assert.equal(t.string(''+fixture.source), ''+fixture.expect);
+        });
     });
 });
