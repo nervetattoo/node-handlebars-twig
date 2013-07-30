@@ -1,22 +1,31 @@
+#!/usr/bin/env node
+
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 var eyes = require('eyes');
 var fs = require('fs');
 var Transpiler = require('./lib/transpiler');
+var argv = require('optimist')
+    .options('f', {
+        alias: 'file',
+        demand: true,
+        describe: 'Handlebars template to load'
+    })
+    .options('o', {
+        alias: 'out',
+        describe: 'Output file path'
+    })
+    .argv;
 
-var transpiler = new Transpiler('fixtures/complex.hbs');
-transpiler.generateAST(transpiler.processAST);
+var tp = new Transpiler('fixtures/complex.hbs');
 
-return;
-var rules = [
-    [/\{\{#unless ([a-zA-Z.-_]+)\}\}/, '{% if not $1 %}'],
-    [/\{\{\/unless\}\}/, '{% endif %}'],
-];
+var out = tp
+    .file(argv.file)
+    .toString();
 
-var result = _.reduce(rules, function(memo, rule) {
-    return memo.replace(rule[0], rule[1]);
-}, src);
-
-console.log(src);
-console.log('===');
-console.log(result);
+if (argv.o) {
+    fs.writeFileSync(argv.o, out);
+}
+else {
+    console.log(out);
+}
