@@ -1,12 +1,13 @@
 {
-  "name": "grunt-handlebars-twig-transpiler",
-  "version": "0.0.0",
+  "name": "handlebars-twig",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": {
+    "name": "Raymond Julin",
+    "mail": "raymond.julin@gmail.com",
+    "url": "http://raymondjulin.com"
   },
-  "author": "",
   "license": "BSD",
   "dependencies": {
     "lodash": "~1.3.1",
