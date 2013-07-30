@@ -1,7 +1,15 @@
 node-handlebars-twig
 ====================
 
+**WIP**
+
 Transpile Handlebars templates to Twig templates
+
+## Rationale
+
+In optimising initial rendering of SPAs we saw the need to duplicate small hbs templates into PHP Twig templates on the server.
+But since Handlebars core is made up of such a small feature set we figured we could be rigorous in writing simple hbs templates
+and then transpile those to twig templates.
 
 Look at `fixtures/$fixture/in.hbs` vs `out.twig` to see what is run through the tests.
 Get started with contributing by cloning and running:
