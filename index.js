@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-var Handlebars = require('handlebars');
-var _ = require('lodash');
-var eyes = require('eyes');
 var fs = require('fs');
 var Transpiler = require('./lib/transpiler');
 var argv = require('optimist')
@@ -13,7 +10,7 @@ var argv = require('optimist')
     })
     .options('o', {
         alias: 'out',
-        describe: 'Output file path'
+        describe: 'Output file path, stdout if '
     })
     .argv;
 
